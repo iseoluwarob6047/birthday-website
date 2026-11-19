@@ -14,11 +14,20 @@ export default function SignIn() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    setError('');
+
     const result = signIn(email);
+
     if (!result.ok) {
       setError(result.error || 'Sign-in unavailable');
       return;
     }
+
+    // Track successful login with Meta Pixel
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('trackCustom', 'Login');
+    }
+
     router.push('/welcome');
   }
 
@@ -31,7 +40,7 @@ export default function SignIn() {
             <h1>The moment<br /><em>continues.</em></h1>
             <p>Pick up where you left off in your personal celebration space.</p>
             <div className="form-decoration">
-              <span>✳</span>
+              <span>✳️</span>
               <span>A LITTLE SOMETHING SPECIAL</span>
             </div>
           </div>
@@ -42,12 +51,23 @@ export default function SignIn() {
             <form onSubmit={submit}>
               <label>
                 Email address
-                <input type="email" placeholder="you@example.com" required autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} />
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
               </label>
               {error && <p className="form-error" role="alert">{error}</p>}
-              <button className="button button-dark full-button">Enter your account <ArrowRight size={17} /></button>
+              <button className="button button-dark full-button">
+                Enter your account <ArrowRight size={17} />
+              </button>
             </form>
-            <p className="form-end">New here? <Link href="/signup">Create an account</Link></p>
+            <p className="form-end">
+              New here? <Link href="/signup">Create an account</Link>
+            </p>
           </div>
         </div>
       </main>
