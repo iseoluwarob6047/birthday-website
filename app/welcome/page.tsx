@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { ArrowRight, ArrowUpRight, CheckCircle2, Gift, HelpCircle, LogOut, MapPin, MoveUpRight, Wallet, Lock } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, ArrowUpRight, Gift, HelpCircle, LogOut, MapPin, MoveUpRight, Wallet, Lock } from 'lucide-react';
 import { SiteShell } from '../../components/site-shell';
 import { useApp } from '../../components/app-provider';
 import { money } from '../../lib/data';
@@ -10,6 +10,7 @@ import { money } from '../../lib/data';
 export default function Welcome() {
   const { profile, loaded, signOut } = useApp();
   const router = useRouter();
+  const [withdrawalMethod, setWithdrawalMethod] = useState('');
 
   useEffect(() => {
     if (loaded && !profile) router.replace('/signin');
@@ -45,7 +46,18 @@ export default function Welcome() {
               <p>Your allocation</p>
               <strong>{money(profile.allocation)}</strong>
               <div className="balance-card-footer">
-                <span><CheckCircle2 size={17} /> Account ready</span>
+                <label className="withdrawal-method">
+                  <span className="withdrawal-method-label">Select withdrawal method</span>
+                  <select
+                    className={`withdrawal-select${withdrawalMethod ? ' has-value' : ''}`}
+                    value={withdrawalMethod}
+                    onChange={(e) => setWithdrawalMethod(e.target.value)}
+                  >
+                    <option value="">Choose a method</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="cashapp">Cash App</option>
+                  </select>
+                </label>
                 <span>USD</span>
                 {profile.paymentVerified && <Lock size={17} className="balance-lock-icon" />}
               </div>
@@ -90,7 +102,7 @@ export default function Welcome() {
               </Link>
               <Link href="/support">
                 <HelpCircle size={18} />
-                <span>Help & support</span>
+                <span>Help &amp; support</span>
                 <ArrowRight size={17} />
               </Link>
             </div>
