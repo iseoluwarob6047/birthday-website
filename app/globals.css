@@ -81,7 +81,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
 .feature-outline{border:1px solid var(--line);border-radius:20px}
 .feature-caption{font-size:.8rem;color:var(--muted)}
 .feature-rows{display:grid;gap:1rem}
-.privacy-point{display:flex;gap:.8rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--line)}
 .story-section{padding:5rem 0;display:grid;gap:2rem}
 .story-intro{max-width:640px}
 .story-body{max-width:720px;color:var(--muted)}
@@ -117,6 +116,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
 .camera-panel{background:var(--panel2);border:1px dashed var(--line);border-radius:16px;padding:1.5rem;text-align:center}
 .camera-empty{color:var(--muted)}
 .camera-guide{border:1px solid var(--gold);border-radius:12px;opacity:.6}
+.camera-approved{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.8rem 1rem;border:1px solid var(--ok);border-radius:10px;color:var(--ok);font-size:.9rem;letter-spacing:.02em;background:color-mix(in srgb,var(--ok) 8%,transparent)}
+.camera-approved svg{flex:0 0 auto}
 .answer-state{padding:.8rem 1rem;border-radius:10px;font-size:.9rem;border:1px solid var(--line)}
 .answer-state.success{color:var(--ok);border-color:var(--ok)}
 .answer-state.error{color:var(--err);border-color:var(--err)}
@@ -136,6 +137,13 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
 .balance-card-header{margin-bottom:1.5rem;font-size:.8rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
 .balance-card-footer{margin-top:1.5rem;font-size:.85rem;color:var(--muted)}
 .balance-card-icon,.balance-lock-icon,.donation-icon{color:var(--gold)}
+.summary-list>div{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.summary-list>div>span{display:inline-flex;align-items:center;gap:.4rem}
+.summary-tag{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:.15rem .5rem;font-weight:400}
+.withdraw-method{display:grid;gap:.45rem;margin-top:1.5rem;text-align:left}
+.withdraw-method-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.withdraw-method-select{cursor:pointer;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:2.5rem}
+.withdraw-method-note{display:flex;align-items:center;gap:.45rem;margin:0;font-size:.8rem;color:var(--muted)}
 
 /* donation */
 .donation-page{padding:3rem 0}
@@ -155,6 +163,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
 .withdraw-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:2rem}
 .finished-card{text-align:center;border-color:var(--ok)}
 .finished-symbol{font-size:2.5rem;color:var(--ok)}
+.finished-card .finished-symbol{margin-bottom:.9rem}
+.finished-card .section-overline{margin-bottom:.6rem;justify-content:center}
+.finished-copy{display:grid;justify-items:center;gap:.35rem;margin-bottom:1.75rem}
+.finished-copy h2{margin:0;line-height:1.1}
+.finished-copy .verification-note{display:flex;align-items:flex-start;gap:.45rem;text-align:left;max-width:420px;margin:0;font-size:.8rem;color:var(--muted)}
+.finished-copy .verification-note svg{flex:0 0 auto;margin-top:.22rem}
 .withdraw-stepper{display:flex;gap:.6rem;margin-bottom:1.5rem;font-size:.8rem;color:var(--muted)}
 .summary-list li{display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--line)}
 .total{display:flex;justify-content:space-between;font-family:Georgia,serif;font-size:1.4rem;padding-top:1rem;color:var(--gold)}

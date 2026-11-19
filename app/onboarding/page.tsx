@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, Camera, CheckCircle2, RefreshCw, ShieldCheck, VideoOff } from 'lucide-react';
+import { ArrowRight, Camera, CheckCircle2, VideoOff } from 'lucide-react';
 import { SiteShell } from '../../components/site-shell';
 import { useApp } from '../../components/app-provider';
 
@@ -84,10 +84,6 @@ export default function Onboarding() {
               <span className="form-step">02 / ONBOARDING</span>
               <h2>Made personal.</h2>
               <p>This optional camera interaction demonstrates a permission-aware onboarding experience. It does not verify identity.</p>
-              <div className="privacy-point">
-                <ShieldCheck size={20} />
-                <span>No facial data or images are retained.</span>
-              </div>
               {error && (
                 <div className="form-error" role="alert">
                   <VideoOff size={18} />{error}
@@ -104,9 +100,9 @@ export default function Onboarding() {
                 </button>
               )}
               {captured && (
-                <button className="button button-light full-button" onClick={() => { setCaptured(false); start(); }}>
-                  <RefreshCw size={17} /> Try again
-                </button>
+                <div className="camera-approved">
+                  <CheckCircle2 size={18} /> Approved
+                </div>
               )}
               <button className="button button-plain full-button" onClick={finish}>
                 Continue to your account <ArrowRight size={17} />
