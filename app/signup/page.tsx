@@ -35,6 +35,9 @@ export default function SignUp() {
       setBusy(false);
       return;
     }
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+  (window as any).fbq('track', 'CompleteRegistration');
+}
     router.push('/onboarding');
   }
 
